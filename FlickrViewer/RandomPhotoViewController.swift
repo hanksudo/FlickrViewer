@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  RandomPhotoViewController.swift
 //  FlickrViewer
 //
 //  Created by Hank Wang on 2018/5/4.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class RandomPhotoViewController: UIViewController {
 
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var imageView: UIImageView!
