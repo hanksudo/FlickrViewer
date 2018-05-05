@@ -14,25 +14,34 @@ struct Error {
 
 class FlickrAPI {
     
-    static let baseURL = "https://api.flickr.com/services/rest/"
-    static let baseParams = [
-        // https://www.flickr.com/services/apps/create/apply/?
-        "api_key": "",
-        "extras": "url_m",
-        "format": "json",
-        "nojsoncallback": 1
-        ] as [String : Any]
+    // https://www.flickr.com/services/apps/create/apply/
+    static let apiKey = "25864e959d7ccdf8ffdc4e81238e2ef1"  // tmp api key
     
     class func prepareURL(_ params: [String: Any]) -> URL {
-        let urlString = baseURL + escapedParameters(params as [String : AnyObject])
-        return URL(string: urlString)!
+        var components = URLComponents()
+        components.scheme = "https"
+        components.host = "api.flickr.com"
+        components.path = "/services/rest/"
+        components.queryItems = [URLQueryItem]()
+        
+        components.queryItems!.append(URLQueryItem(name: "api_key", value: apiKey))
+        components.queryItems!.append(URLQueryItem(name: "extras", value: "url_m"))
+        components.queryItems!.append(URLQueryItem(name: "format", value: "json"))
+        components.queryItems!.append(URLQueryItem(name: "nojsoncallback", value: "1"))
+        
+        for (key, value) in params {
+            components.queryItems!.append(URLQueryItem(name: key, value: "\(value)"))
+        }
+        
+        return components.url!
     }
     
     class func searchPhotos(text: String, completionHandler: @escaping ([[String: AnyObject]], Error?) -> Void) {
-        var params = baseParams
-        params["method"] = "flickr.photos.search"
-        params["in_gallery"] = 1
-        params["text"] = text
+        var params = [
+            "method": "flickr.photos.search",
+            "in_gallery": 1,
+            "text": text
+        ] as [String: Any]
         
         func handleError(_ message: String) {
             completionHandler([[:]], Error(message: message))
@@ -74,9 +83,11 @@ class FlickrAPI {
     }
     
     class func getPhotos(_ galleryID: Int, completionHandler: @escaping ([[String: AnyObject]], Error?) -> Void) {
-        var params = baseParams
-        params["method"] = "flickr.galleries.getPhotos"
-        params["gallery_id"] = galleryID
+        
+        var params = [
+            "method": "flickr.galleries.getPhotos",
+            "gallery_id": galleryID,
+        ] as [String: Any]
         
         func handleError(_ message: String) {
             completionHandler([[:]], Error(message: message))
