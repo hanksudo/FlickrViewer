@@ -49,8 +49,6 @@ class SearchPhotosCollectionViewController: UICollectionViewController {
       
         let photoDict = photos[(indexPath as NSIndexPath).row]
         
-        print(indexPath)
-
         if let imageUrlString = photoDict["url_m"] as? String
         {
             cell.imageView.loadFromURL(imageUrlString)
