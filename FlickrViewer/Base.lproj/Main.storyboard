@@ -93,7 +93,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="121" height="113"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="KDc-8o-hpI">
+                                        <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="KDc-8o-hpI" customClass="MyImageView" customModule="FlickrViewer" customModuleProvider="target">
                                             <rect key="frame" x="-2" y="-6" width="124" height="124"/>
                                         </imageView>
                                     </subviews>

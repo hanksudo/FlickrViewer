@@ -10,6 +10,9 @@ import UIKit
 
 class SearchPhotosCollectionViewCell: UICollectionViewCell {
     
-    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var imageView: MyImageView!
 
+    override func prepareForReuse() {
+        imageView.image = nil
+    }
 }

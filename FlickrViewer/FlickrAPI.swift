@@ -127,21 +127,4 @@ class FlickrAPI {
         }
         task.resume()
     }
-    
-    class func escapedParameters(_ parameters: [String: AnyObject]) -> String {
-        if parameters.isEmpty { return "" }
-        
-        var keyValuePairs = [String]()
-        
-        for (key, value) in parameters {
-            // make sure that it is a string value
-            let stringValue = "\(value)"
-            
-            let escapedValue = stringValue.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
-            
-            keyValuePairs.append(key + "=" + "\(escapedValue!)")
-        }
-        
-        return "?\(keyValuePairs.joined(separator: "&"))"
-    }
 }

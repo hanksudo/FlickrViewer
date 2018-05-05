@@ -18,6 +18,8 @@ class SearchPhotosCollectionViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        collectionView?.register(SearchPhotosCollectionViewCell.self, forCellWithReuseIdentifier: "cell")
+        
         let minimumInterItemSpacing: CGFloat = 3
         let minimumLineSpacing: CGFloat = 3
         let numberOfColumns: CGFloat = 3
@@ -60,10 +62,13 @@ class SearchPhotosCollectionViewController: UICollectionViewController {
 
 let imageCache = NSCache<NSString, UIImage>()
 
-extension UIImageView {
+class MyImageView: UIImageView {
+    
+    var task: URLSessionDataTask?
     
     func loadFromURL(_ urlString: String) {
-
+        self.clearTask()
+        
         if let cachedImage = imageCache.object(forKey: urlString as NSString) {
             DispatchQueue.main.async {
                 self.image = cachedImage
@@ -71,9 +76,16 @@ extension UIImageView {
             return
         }
         
-        guard let url = URL(string: urlString) else { return }
-        URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) in
+        guard let url = URL(string: urlString) else {
+            return
+        }
+        
+        task = URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) in
             guard let statusCode = (response as? HTTPURLResponse)?.statusCode, statusCode >= 200 && statusCode <= 299 else {
+                return
+            }
+            
+            guard (error == nil) else {
                 return
             }
             
@@ -82,7 +94,16 @@ extension UIImageView {
             
             DispatchQueue.main.async {
                 self.image = imageToCache
+                self.clearTask()
             }
-        }).resume()
+        })
+        task!.resume()
+    }
+    
+    func clearTask() {
+        if self.task != nil {
+            self.task!.cancel()
+            self.task = nil
+        }
     }
 }
