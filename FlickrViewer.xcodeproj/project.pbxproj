@@ -15,6 +15,7 @@
 		8F83A056209D79BC00BB4C42 /* SearchPhotosCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F83A055209D79BC00BB4C42 /* SearchPhotosCollectionViewCell.swift */; };
 		8FD3AE03209CC70500B997EA /* FlickrAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FD3AE02209CC70500B997EA /* FlickrAPI.swift */; };
 		8FD3AE05209CD49700B997EA /* SearchPhotosCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FD3AE04209CD49700B997EA /* SearchPhotosCollectionViewController.swift */; };
+		8FDDEA4E209E21F200D78346 /* SDWebImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FDDEA4D209E21F200D78346 /* SDWebImage.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		8F83A055209D79BC00BB4C42 /* SearchPhotosCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPhotosCollectionViewCell.swift; sourceTree = "<group>"; };
 		8FD3AE02209CC70500B997EA /* FlickrAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlickrAPI.swift; sourceTree = "<group>"; };
 		8FD3AE04209CD49700B997EA /* SearchPhotosCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPhotosCollectionViewController.swift; sourceTree = "<group>"; };
+		8FDDEA4D209E21F200D78346 /* SDWebImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDWebImage.framework; path = Carthage/Build/iOS/SDWebImage.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,6 +37,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8FDDEA4E209E21F200D78346 /* SDWebImage.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -46,6 +49,7 @@
 			children = (
 				8F4F26F5209C9EC000D714B4 /* FlickrViewer */,
 				8F4F26F4209C9EC000D714B4 /* Products */,
+				8FDDEA4C209E21F100D78346 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -73,6 +77,14 @@
 			path = FlickrViewer;
 			sourceTree = "<group>";
 		};
+		8FDDEA4C209E21F100D78346 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8FDDEA4D209E21F200D78346 /* SDWebImage.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -83,6 +95,7 @@
 				8F4F26EF209C9EC000D714B4 /* Sources */,
 				8F4F26F0209C9EC000D714B4 /* Frameworks */,
 				8F4F26F1209C9EC000D714B4 /* Resources */,
+				8FDDEA4F209E222000D78346 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -138,6 +151,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		8FDDEA4F209E222000D78346 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/SDWebImage.framework",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		8F4F26EF209C9EC000D714B4 /* Sources */ = {
@@ -294,6 +324,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = FlickrViewer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -312,6 +346,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = FlickrViewer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

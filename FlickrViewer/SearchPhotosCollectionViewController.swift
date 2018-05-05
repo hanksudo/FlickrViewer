@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 private let reuseIdentifier = "Cell"
 private let ImageViewTag = 1
@@ -53,7 +54,9 @@ class SearchPhotosCollectionViewController: UICollectionViewController {
         
         if let imageUrlString = photoDict["url_m"] as? String
         {
-            cell.imageView.loadFromURL(imageUrlString)
+            cell.imageView.sd_setImage(with: URL(string: imageUrlString), placeholderImage: UIImage(named: "placeholder.png"))
+
+//            cell.imageView.loadFromURL(imageUrlString)
         }
         
         return cell
